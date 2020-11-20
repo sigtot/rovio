@@ -79,7 +79,7 @@ int main(int argc, char** argv){
   ros::NodeHandle nh_private("~");
 
   std::string rootdir = ros::package::getPath("rovio"); // Leaks memory
-  std::string filter_config = rootdir + "/cfg/rovio.info";
+  std::string filter_config = rootdir + "/cfg/rovio_vlp16.info";
 
   nh_private.param("filter_config", filter_config, filter_config);
 
