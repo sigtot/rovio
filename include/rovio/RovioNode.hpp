@@ -511,7 +511,9 @@ class RovioNode{
     cv::Mat cv_img;
     cv_ptr->image.copyTo(cv_img);
     if(init_state_.isInitialized() && !cv_img.empty()){
-      double msgTime = img->header.stamp.toSec();
+      double msgTime = img->header.stamp.toSec() + 0.0121537; // Camera offset
+      // Remove check for multi-camera sync
+      /*
       if(msgTime != imgUpdateMeas_.template get<mtImgMeas::_aux>().imgTime_){
         for(int i=0;i<mtState::nCam_;i++){
           if(imgUpdateMeas_.template get<mtImgMeas::_aux>().isValidPyr_[i]){
@@ -520,6 +522,7 @@ class RovioNode{
         }
         imgUpdateMeas_.template get<mtImgMeas::_aux>().reset(msgTime);
       }
+      */
       imgUpdateMeas_.template get<mtImgMeas::_aux>().pyr_[camID].computeFromImage(cv_img,true);
       imgUpdateMeas_.template get<mtImgMeas::_aux>().isValidPyr_[camID] = true;
 
